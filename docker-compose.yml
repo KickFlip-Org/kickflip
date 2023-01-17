@@ -1,0 +1,123 @@
+x-source-files: &source-files
+  - ./.editorconfig:/app/.editorconfig:ro
+  - ./.eslintignore:/app/.eslintignore:ro
+  - ./.eslintrc.yaml:/app/.eslintrc.yaml:ro
+  - ./apps/:/app/apps/:ro
+  - ./babel.config.json:/app/babel.config.json:ro
+  - ./libs/:/app/libs/:ro
+  - ./node_modules/:/app/node_modules/:ro
+  - ./nx.json:/app/nx.json:ro
+  - ./package.json:/app/package.json:ro
+  - ./pnpm-lock.yaml:/app/pnpm-lock.yaml:ro
+  - ./tailwind.config.js:/app/tailwind.config.js:ro
+  - ./tools/:/app/tools/:ro
+  - ./tsconfig.base.json:/app/tsconfig.base.json:ro
+  - ./workspace.json:/app/workspace.json:ro
+
+networks:
+  front:
+    name: kickflip-workspace-front
+  databases:
+
+volumes:
+  postgres-data:
+
+services:
+  # Infrastructure
+  traefik:
+    image: traefik:2.8
+    restart: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      front:
+        aliases:
+          - kickflip.kickflip-workspace.dev
+          - api-kickflip.kickflip-workspace.dev
+
+    volumes:
+      - ./docker/config/traefik:/etc/traefik:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - traefik.enable=true
+
+      - traefik.http.routers.dashboard.rule=Host(`kickflip-workspace.dev`)
+      - traefik.http.routers.dashboard.tls=true
+      - traefik.http.routers.dashboard.service=api@internal
+
+  postgres:
+    image: postgres:15-alpine
+    restart: on-failure
+    ports:
+      - 5432:5432
+    networks:
+      - databases
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: secret
+
+
+  kickflip-api:
+    image: kickflip-workspace-dev
+    build:
+      dockerfile: docker/dev.dockerfile
+      context: .
+    working_dir: /app
+    command: pnpm exec nx serve apps/kickflip/api
+    volumes: *source-files
+    restart: on-failure
+    networks:
+      - databases
+      - front
+    depends_on:
+      - postgres
+      - traefik
+    expose:
+      - 8080
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
+
+      ENVIRONMENT: development
+
+      LOGGER_LEVEL: info
+
+      SERVER_PORT: 8080
+      SERVER_CORS: https://kickflip.kickflip-workspace.dev
+
+      DB_HOST: postgres
+      DB_USER: postgres
+      DB_PASSWORD: secret
+      DB_DATABASE: kickflip
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kickflip-api-proxy.rule=Host(`api-kickflip.kickflip-workspace.dev`)
+      - traefik.http.routers.kickflip-api-proxy.tls=true
+      - traefik.http.services.kickflip-api-proxy.loadbalancer.server.port=8080
+
+  kickflip-webui:
+    image: kickflip-workspace-dev
+    build:
+      dockerfile: docker/dev.dockerfile
+      context: .
+    restart: on-failure
+    working_dir: /app
+    command: pnpm exec nx serve apps/kickflip/webui
+    networks:
+      - front
+    volumes: *source-files
+    depends_on:
+      - kickflip-api
+      - traefik
+    expose:
+      - 4200
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
+
+      NEXT_PUBLIC_API_URL: https://api-kickflip.kickflip-workspace.dev
+      
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kickflip-webui.rule=Host(`kickflip.kickflip-workspace.dev`)
+      - traefik.http.routers.kickflip-webui.tls=true
