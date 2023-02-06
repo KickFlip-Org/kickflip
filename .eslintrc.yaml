@@ -1,0 +1,69 @@
+root: true
+
+parser: "@typescript-eslint/parser"
+parserOptions:
+  ecmaVersion: 2021
+  project: tsconfig(.*)?.json
+  sourceType: module
+
+settings:
+  import/resolver:
+    typescript: {}
+
+plugins:
+  - "@nrwl/nx"
+  - simple-import-sort
+  - unused-imports
+
+extends:
+  - hardcore
+  - hardcore/ts
+
+rules:
+  logical-assignment-operators: 0
+  new-cap: off
+  max-statements: off
+  max-params: off
+  no-undef-init: off
+  max-classes-per-file: off
+
+  "@typescript-eslint/no-extraneous-class": off
+  "@typescript-eslint/prefer-readonly-parameter-types": off
+  "@typescript-eslint/no-magic-numbers": off
+  "@typescript-eslint/naming-convention":
+    - error
+    - selector:
+        - default
+      format:
+        - strictCamelCase
+    - selector:
+        - function
+      format:
+        - strictCamelCase
+        - StrictPascalCase
+    - selector:
+        - typeLike
+        - enumMember
+      format:
+        - StrictPascalCase
+    - selector:
+        - objectLiteralProperty
+        - parameter
+      format:
+        - camelCase
+
+  unicorn/prefer-top-level-await: off
+
+  import/prefer-default-export: off
+  import/no-default-export: error
+  import/no-unused-modules: off
+  import/no-cycle: off
+  import/no-unresolved: off
+  import/order: off
+
+  unused-imports/no-unused-imports: error
+
+  decorator-position/decorator-position:
+    - error
+    - properties: "above"
+      methods: "above"

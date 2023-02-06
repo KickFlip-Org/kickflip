@@ -1,0 +1,23 @@
+api:
+  dashboard: true
+  insecure: true
+
+providers:
+  docker:
+    exposedByDefault: false
+    watch: true
+    network: atropos-workspace-front
+  file:
+    watch: true
+    filename: /etc/traefik/dynamic-conf.yml
+
+entryPoints:
+  https:
+    address: :443
+  http:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          permanent: true
