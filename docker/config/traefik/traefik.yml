@@ -6,7 +6,7 @@ providers:
   docker:
     exposedByDefault: false
     watch: true
-    network: atropos-workspace-front
+    network: kickflip-front
   file:
     watch: true
     filename: /etc/traefik/dynamic-conf.yml

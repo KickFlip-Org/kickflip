@@ -13,6 +13,8 @@ x-source-files: &source-files
 
 networks:
   databases:
+  front: 
+    name: kickflip-front
 
 volumes:
   postgres-data:
@@ -25,6 +27,11 @@ services:
     ports:
       - 80:80
       - 443:443
+
+    networks:
+      front:
+        aliases:
+          - "api-kickflip.kickflip-workspace.dev"
 
     volumes:
       - ./docker/config/traefik:/etc/traefik:ro
@@ -60,6 +67,7 @@ services:
     volumes: *source-files
     networks:
       - databases
+      - front
     depends_on:
       - postgres
       - traefik
@@ -81,8 +89,8 @@ services:
       DB_DATABASE: kickflip
     labels:
       - traefik.enable=true
-      - traefik.http.routers.kickflip-api-proxy.rule=Host(`api-kickflip.kickflip-workspace.dev`)
-      - traefik.http.routers.kickflip-api-proxy.tls=true
-      - traefik.http.services.kickflip-api-proxy.loadbalancer.server.port=8080
+      - traefik.http.routers.kickflip-api.rule=Host(`api-kickflip.kickflip-workspace.dev`)
+      - traefik.http.routers.kickflip-api.tls=true
+      - traefik.http.services.kickflip-api.loadbalancer.server.port=8080
 
   

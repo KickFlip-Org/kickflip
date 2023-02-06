@@ -20,6 +20,41 @@
 - [Nest 9](https://nestjs.com/)
 - [Mikro-ORM 5](https://mikro-orm.io/)
 
+### Certificats SSL
+
+L'environnement de développement utilise des certificats SSL lors des échanges.  
+Pour en générer et que le système les reconnaisse, installer `mkcert` :
+
+#### **Arch/Manjaro**
+
+```bash
+sudo pacman -Sy nss mkcert
+```
+
+#### **Génération du certificat racine**
+
+```bash
+mkcert -install
+```
+
+#### **Génération des certificats**
+
+```bash
+(cd docker/config/traefik/certs && mkcert kickflip-workspace.dev "*.kickflip-workspace.dev")
+```
+
+### Résolution DNS de l'environnement de développement
+
+```bash
+sudo nano /etc/hosts
+
+# Ajouter la ligne suivante
+127.0.0.1	kickflip-workspace.dev kickflip.kickflip-workspace.dev api-kickflip.kickflip-workspace.dev
+
+# Sauvegarder et quitter
+```
+
+
 ## Installation des outils de l'environnement
 
 ### Node
