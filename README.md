@@ -89,7 +89,7 @@ pnpm install
 ```bash
 docker compose up -d postgres
 docker compose exec postgres psql -U postgres -c "create database kickflip"
-docker compose run --rm kickflip-api pnpm exec nx run apps/kickflip-api:migrate
+docker compose run --rm kickflip-api pnpm exec nx run kickflip-api:migrate
 ```
 
 ### **Démarrer les services**
