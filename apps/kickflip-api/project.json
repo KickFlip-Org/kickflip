@@ -8,6 +8,12 @@
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "additionalEntryPoints": [
+          {
+            "entryName": "migrate",
+            "entryPath": "apps/kickflip-api/src/scripts/migrate.ts"
+          }
+        ],
         "target": "node",
         "compiler": "tsc",
         "outputPath": "dist/apps/kickflip-api",
@@ -48,6 +54,13 @@
       "options": {
         "jestConfig": "apps/kickflip-api/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node -P tsconfig.app.json -r tsconfig-paths/register src/scripts/migrate.ts",
+        "cwd": "apps/kickflip-api"
       }
     }
   },

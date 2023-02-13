@@ -4,7 +4,6 @@ import { Controller, Get } from "@nestjs/common"
 export class UserController {
     @Get()
     public findAll(): string {
-        console.log("coucou xavier ça fonctionne, d'ailleurs hier j'ai breezi")
-        return "This action returns all cats"
+        return "Coucou"
     }
 }

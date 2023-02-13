@@ -83,3 +83,17 @@ sudo pacman -Sy pnpm
 ```bash
 pnpm install
 ```
+
+### **Initialiser la base de données**
+
+```bash
+docker compose up -d postgres
+docker compose exec postgres psql -U postgres -c "create database kickflip"
+docker compose run --rm kickflip-api pnpm exec nx run apps/kickflip-api:migrate
+```
+
+### **Démarrer les services**
+
+```bash
+docker compose up -d
+```
