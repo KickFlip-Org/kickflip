@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common"
+import { AuthModule } from "./modules/auth/auth.module"
 import { ConfigModule } from "./modules/core/config/config.module"
 import { DatabaseModule } from "./modules/core/database/database.module"
 import { LoggerModule } from "./modules/core/logger/logger.module"
@@ -12,6 +13,7 @@ import { UserModule } from "./modules/user/user.module"
         LoggerModule,
         UserModule,
         RoleModule,
+        AuthModule,
     ],
 
     controllers: [],

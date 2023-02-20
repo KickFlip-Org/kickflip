@@ -25,7 +25,7 @@ export class UserService {
 
     public async create(parameters: CreateUserDto): Promise<UserDto> {
         const em = this.orm.em.fork()
-        const item = this.mapper.createDtoToEntity(parameters)
+        const item = await this.mapper.createDtoToEntity(parameters)
         await em.persistAndFlush(item)
         return await this.mapper.entityToDto(item, em)
     }

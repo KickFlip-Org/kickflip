@@ -28,6 +28,9 @@ export class UserEntity {
     @Property()
     public phone: string
 
+    @Property()
+    public hashedPassword: string
+
     @Property({
         type: "timestamp with time zone",
     })
@@ -48,11 +51,13 @@ export class UserEntity {
         lastName: string
         createdAt: Date
         email: string
+        hashedPassword: string
     }) {
         this.firstName = parameters.firstName
         this.lastName = parameters.lastName
         this.createdAt = parameters.createdAt
         this.email = parameters.email
         this.userName = parameters.userName
+        this.hashedPassword = parameters.hashedPassword
     }
 }

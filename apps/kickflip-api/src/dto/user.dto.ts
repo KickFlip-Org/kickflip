@@ -31,6 +31,8 @@ export class UserDto {
 
     @IsEmail()
     public email!: string
+
+    public passwordConfirm: string
 }
 
 export class CreateUserDto {
@@ -50,6 +52,8 @@ export class CreateUserDto {
     public lastName!: string
 
     public phone!: string
+
+    public passwordConfirm: string
 
     @IsISO8601({ strict: true })
     public createdAt: string

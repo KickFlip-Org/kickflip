@@ -1,18 +1,22 @@
 import type { EntityManager } from "@mikro-orm/core"
 import { Injectable } from "@nestjs/common"
+import { genSalt, hash } from "bcrypt"
 import type { CreateUserDto, UpdateUserDto, UserDto } from "../../dto/user.dto"
 
 import { UserEntity } from "./user.entity"
 
 @Injectable()
 export class UserMapper {
-    public createDtoToEntity(dto: CreateUserDto): UserEntity {
+    public async createDtoToEntity(dto: CreateUserDto): Promise<UserEntity> {
+        const salt = await genSalt()
+        const hashedPassword = await hash(dto.passwordConfirm, salt)
         return new UserEntity({
             firstName: dto.firstName,
             lastName: dto.lastName,
             userName: dto.userName,
-            createdAt: new Date(dto.createdAt),
+            createdAt: new Date(),
             email: dto.email,
+            hashedPassword,
         })
     }
 
@@ -31,6 +35,7 @@ export class UserMapper {
             userName: entity.userName,
             phone: entity.phone,
             credits: entity.credits,
+            passwordConfirm: entity.hashedPassword,
         }
     }
 
