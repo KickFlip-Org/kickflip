@@ -33,7 +33,7 @@ export class AuthService {
         userName: string,
         password: string
     ): Promise<UserDto | null> {
-        const user = await this.userService.get(userName)
+        const user = await this.userService.get({ userName })
         const isMatch = await compare(password, user.passwordConfirm)
         if (isMatch) {
             return user

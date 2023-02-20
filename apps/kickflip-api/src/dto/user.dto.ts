@@ -5,6 +5,7 @@ import {
     IsUUID,
     MinLength,
 } from "class-validator"
+import type { RoleDto } from "./role.dto"
 
 export class UserDto {
     @IsUUID(4)
@@ -33,6 +34,8 @@ export class UserDto {
     public email!: string
 
     public passwordConfirm: string
+
+    public role: RoleDto
 }
 
 export class CreateUserDto {
@@ -50,10 +53,6 @@ export class CreateUserDto {
 
     @IsString()
     @MinLength(8)
-    public password!: string
-
-    @IsString()
-    @MinLength(8)
     public passwordConfirm: string
 
     public phone!: string
@@ -62,6 +61,8 @@ export class CreateUserDto {
 
     @IsEmail()
     public email!: string
+
+    public role: string
 }
 
 export class UpdateUserDto {
@@ -89,4 +90,14 @@ export class UpdateUserDto {
 
     @IsEmail()
     public email!: string
+}
+
+export class UserLoginDto {
+    @IsString()
+    @MinLength(1)
+    public userName!: string
+
+    @IsString()
+    @MinLength(8)
+    public passwordConfirm: string
 }

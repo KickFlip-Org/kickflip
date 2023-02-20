@@ -11,8 +11,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
     public constructor(authService: AuthService) {
         super({
-            usernameField: "login",
-            passwordField: "password",
+            usernameField: "userName",
+            passwordField: "passwordConfirm",
             userIdField: "userId",
         })
         this.authService = authService

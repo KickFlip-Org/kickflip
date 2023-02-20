@@ -52,6 +52,9 @@ export class UserEntity {
         createdAt: Date
         email: string
         hashedPassword: string
+        role: RoleEntity
+        phone: string
+        credits: number
     }) {
         this.firstName = parameters.firstName
         this.lastName = parameters.lastName
@@ -59,5 +62,8 @@ export class UserEntity {
         this.email = parameters.email
         this.userName = parameters.userName
         this.hashedPassword = parameters.hashedPassword
+        this.role = parameters.role
+        this.phone = parameters.phone
+        this.credits = parameters.credits
     }
 }
