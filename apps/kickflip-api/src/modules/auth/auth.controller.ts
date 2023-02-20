@@ -4,7 +4,7 @@ import { JwtAuthGuard } from "./guards/jwt-auth.guard"
 import { LocalAuthGuard } from "./guards/local-auth.guard"
 import { AuthService } from "./services/auth.service"
 import type { Payload } from "../../dto/payload"
-import { CreateUserDto, UserLoginDto, type UserDto } from "../../dto/user.dto"
+import { CreateUserDto, type UserDto } from "../../dto/user.dto"
 
 @Controller("auth")
 export class AuthController {
