@@ -2,11 +2,12 @@ import { ReflectMetadataProvider } from "@mikro-orm/core"
 import { MikroOrmModule } from "@mikro-orm/nestjs"
 import { Module } from "@nestjs/common"
 import { DatabaseNamingStrategy } from "../../../utils/database-naming-strategy"
+import { RoleEntity } from "../../role/role.entity"
 import { UserEntity } from "../../user/user.entity"
 import { ConfigModule } from "../config/config.module"
 import { ConfigService } from "../config/config.service"
 
-const entities = [UserEntity]
+const entities = [UserEntity, RoleEntity]
 
 @Module({
     exports: [MikroOrmModule],
