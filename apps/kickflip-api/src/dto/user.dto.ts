@@ -36,9 +36,6 @@ export class UserDto {
 }
 
 export class CreateUserDto {
-    @IsUUID(4)
-    public id!: string
-
     @IsString()
     @MinLength(1)
     public userName!: string
@@ -51,12 +48,15 @@ export class CreateUserDto {
     @MinLength(1)
     public lastName!: string
 
-    public phone!: string
+    @IsString()
+    @MinLength(8)
+    public password!: string
 
+    @IsString()
+    @MinLength(8)
     public passwordConfirm: string
 
-    @IsISO8601({ strict: true })
-    public createdAt: string
+    public phone!: string
 
     public credits: number
 
