@@ -57,12 +57,12 @@ export class CreateUserDto {
 
     @IsString()
     @MinLength(8)
-    public passwordConfirm: string;
+    public passwordConfirm: string
 
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => UserAddressDto)
-    public address: UserAddressDto[];
+    public address: UserAddressDto[]
 
     public phone!: string
 
@@ -93,7 +93,7 @@ export class UpdateUserDto {
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => UserAddressDto)
-    public address: UserAddressDto[];
+    public address: UserAddressDto[]
 
     public phone!: string
 
