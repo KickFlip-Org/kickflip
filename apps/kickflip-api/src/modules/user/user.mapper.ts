@@ -11,7 +11,7 @@ export class UserMapper {
             firstName: dto.firstName,
             lastName: dto.lastName,
             userName: dto.userName,
-            createdAt: new Date(dto.createdAt),
+            createdAt: new Date(),
             email: dto.email,
         })
     }
