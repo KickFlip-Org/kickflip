@@ -1,12 +1,21 @@
 import type { EntityManager } from "@mikro-orm/core"
 import { Injectable } from "@nestjs/common"
 import type { CreateUserDto, UpdateUserDto, UserDto } from "../../dto/user.dto"
+import type { UserAddressMapper } from "../user-address/user-address.mapper"
 
 import { UserEntity } from "./user.entity"
 
 @Injectable()
 export class UserMapper {
-    public createDtoToEntity(dto: CreateUserDto): UserEntity {
+    private readonly userAddressMapper: UserAddressMapper
+
+    constructor(userAddressMapper: UserAddressMapper) {
+        this.userAddressMapper = userAddressMapper
+    }
+
+    public createDtoToEntity(dto: CreateUserDto, em: EntityManager): UserEntity {
+        
+        
         return new UserEntity({
             firstName: dto.firstName,
             lastName: dto.lastName,
@@ -20,6 +29,12 @@ export class UserMapper {
         entity: UserEntity,
         em: EntityManager
     ): Promise<UserDto> {
+        const addresses = []
+
+        for await (const address of entity.address.getItems(true)) {
+            addresses.push(this.userAddressMapper.entityToDto(address, em))
+        }
+
         await em.populate(entity, ["role"])
 
         return {

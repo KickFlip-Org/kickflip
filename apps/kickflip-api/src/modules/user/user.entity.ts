@@ -1,13 +1,16 @@
 import { randomUUID } from "node:crypto"
 
 import {
+    Collection,
     Entity,
+    OneToMany,
     OneToOne,
     PrimaryKey,
     Property,
     UuidType,
 } from "@mikro-orm/core"
 import { RoleEntity } from "../role/role.entity"
+import { UserAddressEntity } from "../user-address/user-address.entity"
 
 @Entity()
 export class UserEntity {
@@ -17,30 +20,33 @@ export class UserEntity {
     public id = randomUUID()
 
     @Property()
-    public userName: string
+    public userName!: string
 
     @Property()
-    public firstName: string
+    public firstName!: string
 
     @Property()
-    public lastName: string
+    public lastName!: string
+
+    @OneToMany(() => UserAddressEntity, (relation) => relation.address)
+    public address = new Collection<UserAddressEntity>(this);
 
     @Property()
-    public phone: string
+    public phone!: string
 
     @Property({
         type: "timestamp with time zone",
     })
-    public createdAt: Date
+    public createdAt!: Date
 
     @Property()
-    public email: string
+    public email!: string
 
     @OneToOne({ entity: () => RoleEntity })
-    public role: RoleEntity
+    public role!: RoleEntity
 
     @Property()
-    public credits: number
+    public credits!: number
 
     public constructor(parameters: {
         userName: string
@@ -49,10 +55,10 @@ export class UserEntity {
         createdAt: Date
         email: string
     }) {
+        this.userName = parameters.userName
         this.firstName = parameters.firstName
         this.lastName = parameters.lastName
         this.createdAt = parameters.createdAt
         this.email = parameters.email
-        this.userName = parameters.userName
     }
 }

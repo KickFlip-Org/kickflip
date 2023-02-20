@@ -1,10 +1,14 @@
+import { Type } from "class-transformer"
 import {
+    IsArray,
     IsEmail,
     IsISO8601,
     IsString,
     IsUUID,
     MinLength,
+    ValidateNested,
 } from "class-validator"
+import { UserAddressDto } from "./user-address.dto"
 
 export class UserDto {
     @IsUUID(4)
@@ -48,11 +52,12 @@ export class CreateUserDto {
 
     @IsString()
     @MinLength(8)
-    public password!: string
+    public passwordConfirm: string;
 
-    @IsString()
-    @MinLength(8)
-    passwordConfirm: string;
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => UserAddressDto)
+    public address!: UserAddressDto[];
 
     public phone!: string
 
@@ -77,6 +82,11 @@ export class UpdateUserDto {
     @IsString()
     @MinLength(1)
     public lastName!: string
+
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => UserAddressDto)
+    public address: UserAddressDto[];
 
     public phone!: string
 

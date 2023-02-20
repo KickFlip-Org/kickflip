@@ -1,39 +1,38 @@
 import { type FilterQuery, MikroORM } from "@mikro-orm/core"
 import { Injectable } from "@nestjs/common"
-
-import { UserEntity } from "./user.entity"
-import type { CreateUserDto, UpdateUserDto, UserDto } from "../../dto/user.dto"
-import { UserMapper } from "./user.mapper"
+import type { CreateUserAddressDto, UpdateUserAddressDto, UserAddressDto } from "../../dto/user-address.dto"
+import { UserAddressEntity } from "./user-address.entity"
+import type { UserAddressMapper } from "./user-address.mapper"
 
 @Injectable()
-export class UserService {
+export class UserAddressService {
     private readonly orm: MikroORM
 
-    private readonly mapper: UserMapper
+    private readonly mapper: UserAddressMapper
 
-    public constructor(orm: MikroORM, mapper: UserMapper) {
+    public constructor(orm: MikroORM, mapper: UserAddressMapper) {
         this.orm = orm
         this.mapper = mapper
     }
 
-    public async get(filter: FilterQuery<UserEntity>): Promise<UserDto> {
+    public async get(filter: FilterQuery<UserAddressEntity>): Promise<UserAddressDto> {
         const em = this.orm.em.fork()
-        const repository = em.getRepository(UserEntity)
+        const repository = em.getRepository(UserAddressEntity)
         const item = await repository.findOneOrFail(filter)
         return await this.mapper.entityToDto(item, em)
     }
 
-    public async create(parameters: CreateUserDto): Promise<UserDto> {
+    public async create(parameters: CreateUserAddressDto): Promise<UserAddressDto> {
         const em = this.orm.em.fork()
         const item = this.mapper.createDtoToEntity(parameters, em)
         await em.persistAndFlush(item)
-        return await this.mapper.entityToDto(item, em)
+        return await this.mapper.entityToDto(await item, em)
     }
 
     public async update(
         id: string,
-        parameters: UpdateUserDto
-    ): Promise<UserDto> {
+        parameters: UpdateUserAddressDto
+    ): Promise<UserAddressDto> {
         const em = this.orm.em.fork()
         const item = await this.mapper.updateDtoToEntity(id, parameters, em)
         await em.persistAndFlush(item)
@@ -42,7 +41,7 @@ export class UserService {
 
     public async delete(id: string): Promise<void> {
         const em = this.orm.em.fork()
-        const repository = em.getRepository(UserEntity)
+        const repository = em.getRepository(UserAddressEntity)
         const item = await repository.findOneOrFail(id)
 
         await repository.removeAndFlush(item)
