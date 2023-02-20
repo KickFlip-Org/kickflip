@@ -1,11 +1,6 @@
 import { randomUUID } from "node:crypto"
 
-import {
-    Entity,
-    PrimaryKey,
-    Property,
-    UuidType,
-} from "@mikro-orm/core"
+import { Entity, PrimaryKey, Property, UuidType } from "@mikro-orm/core"
 
 @Entity()
 export class ProductCategoryEntity {
@@ -17,9 +12,7 @@ export class ProductCategoryEntity {
     @Property()
     public name: string
 
-    public constructor(parameters: {
-        name: string
-    }) {
+    public constructor(parameters: { name: string }) {
         this.name = parameters.name
     }
 }

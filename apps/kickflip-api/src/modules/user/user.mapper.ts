@@ -1,27 +1,40 @@
 import type { EntityManager } from "@mikro-orm/core"
 import { Injectable } from "@nestjs/common"
+import { genSalt, hash } from "bcrypt"
 import type { CreateUserDto, UpdateUserDto, UserDto } from "../../dto/user.dto"
 import type { UserAddressMapper } from "../user-address/user-address.mapper"
+import { RoleEntity } from "../role/role.entity"
+import { RoleMapper } from "../role/role.mapper"
 
 import { UserEntity } from "./user.entity"
 
 @Injectable()
 export class UserMapper {
     private readonly userAddressMapper: UserAddressMapper
+    private readonly roleMapper: RoleMapper
 
-    constructor(userAddressMapper: UserAddressMapper) {
+    public constructor(roleMapper: RoleMapper, userAddressMapper: UserAddressMapper) {
+        this.roleMapper = roleMapper
         this.userAddressMapper = userAddressMapper
     }
 
-    public createDtoToEntity(dto: CreateUserDto, em: EntityManager): UserEntity {
-        
-        
+    public async createDtoToEntity(
+        dto: CreateUserDto,
+        em: EntityManager
+    ): Promise<UserEntity> {
+        const salt = await genSalt()
+        const hashedPassword = await hash(dto.passwordConfirm, salt)
+        const role = await em.getRepository(RoleEntity).findOneOrFail(dto.role)
         return new UserEntity({
             firstName: dto.firstName,
             lastName: dto.lastName,
             userName: dto.userName,
             createdAt: new Date(),
             email: dto.email,
+            hashedPassword,
+            role,
+            phone: dto.phone,
+            credits: dto.credits,
         })
     }
 
@@ -36,6 +49,7 @@ export class UserMapper {
         }
 
         await em.populate(entity, ["role"])
+        const role = this.roleMapper.entityToDto(entity.role)
 
         return {
             id: entity.id,
@@ -46,6 +60,8 @@ export class UserMapper {
             userName: entity.userName,
             phone: entity.phone,
             credits: entity.credits,
+            passwordConfirm: entity.hashedPassword,
+            role,
         }
     }
 
