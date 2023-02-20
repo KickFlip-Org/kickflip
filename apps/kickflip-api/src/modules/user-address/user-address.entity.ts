@@ -16,8 +16,8 @@ export class UserAddressEntity {
     })
     public id = randomUUID()
 
-    @ManyToOne({ entity: () => UserEntity})
-    public userId: UserEntity
+    @ManyToOne({ entity: () => UserEntity })
+    public user: UserEntity
 
     @Property()
     public address: string
@@ -32,13 +32,13 @@ export class UserAddressEntity {
     public country: string
 
     public constructor(parameters: {
-        userId: UserEntity
+        user: UserEntity
         address: string
         city: string
         postalCode: number
         country: string
     }) {
-        this.userId = parameters.userId
+        this.user = parameters.user
         this.address = parameters.address
         this.city = parameters.city
         this.postalCode = parameters.postalCode

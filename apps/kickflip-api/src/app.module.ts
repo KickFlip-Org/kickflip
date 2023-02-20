@@ -14,11 +14,8 @@ import { UserModule } from "./modules/user/user.module"
         LoggerModule,
         UserModule,
         RoleModule,
-<<<<<<< HEAD
         UserAddressModule,
-=======
         AuthModule,
->>>>>>> 02c046b41f967c072e8cee849643963dab17eb88
     ],
 
     controllers: [],

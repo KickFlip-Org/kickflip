@@ -1,17 +1,12 @@
-import {
-    IsNumber,
-    IsString,
-    IsUUID,
-    MinLength,
-} from "class-validator"
-import type { UserDto } from "./user.dto"
+import { IsNumber, IsString, IsUUID, MinLength } from "class-validator"
+import { UserDto } from "./user.dto"
 
 export class UserAddressDto {
     @IsUUID(4)
     public id!: string
 
     @MinLength(1)
-    public userId!: UserDto
+    public user!: UserDto
 
     @IsString()
     @MinLength(1)
@@ -31,7 +26,7 @@ export class UserAddressDto {
 
 export class CreateUserAddressDto {
     @MinLength(1)
-    public userId!: UserDto
+    public user!: UserDto
 
     @IsString()
     @MinLength(1)
@@ -54,7 +49,7 @@ export class UpdateUserAddressDto {
     public id!: string
 
     @MinLength(1)
-    public userId!: UserDto
+    public user!: UserDto
 
     @IsString()
     @MinLength(1)

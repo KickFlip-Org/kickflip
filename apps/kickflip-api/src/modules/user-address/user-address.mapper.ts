@@ -1,23 +1,30 @@
 import type { EntityManager } from "@mikro-orm/core"
 import { Injectable } from "@nestjs/common"
-import type { CreateUserAddressDto, UpdateUserAddressDto, UserAddressDto } from "../../dto/user-address.dto"
+import type {
+    CreateUserAddressDto,
+    UpdateUserAddressDto,
+    UserAddressDto,
+} from "../../dto/user-address.dto"
 import { UserEntity } from "../user/user.entity"
-import type { UserMapper } from "../user/user.mapper"
+import { UserMapper } from "../user/user.mapper"
 import { UserAddressEntity } from "./user-address.entity"
 
 @Injectable()
 export class UserAddressMapper {
     private readonly userMapper: UserMapper
 
-    constructor(userMapper: UserMapper){
+    public constructor(userMapper: UserMapper) {
         this.userMapper = userMapper
     }
 
-    public async createDtoToEntity(dto: CreateUserAddressDto, em: EntityManager): Promise<UserAddressEntity> {
-        const user = await em.getRepository(UserEntity).findOneOrFail(dto.userId)
-        
+    public async createDtoToEntity(
+        dto: CreateUserAddressDto,
+        em: EntityManager
+    ): Promise<UserAddressEntity> {
+        const user = await em.getRepository(UserEntity).findOneOrFail(dto.user)
+
         return new UserAddressEntity({
-            userId: user,
+            user,
             address: dto.address,
             city: dto.city,
             postalCode: dto.postalCode,
@@ -31,11 +38,11 @@ export class UserAddressMapper {
     ): Promise<UserAddressDto> {
         await em.populate(entity, ["address"])
 
-        const user = await this.userMapper.entityToDto(entity.userId, em)
+        const user = await this.userMapper.entityToDto(entity.user, em)
 
         return {
             id: entity.id,
-            userId: user,
+            user,
             address: entity.address,
             city: entity.city,
             postalCode: entity.postalCode,
@@ -48,10 +55,12 @@ export class UserAddressMapper {
         dto: UpdateUserAddressDto,
         em: EntityManager
     ): Promise<UserAddressEntity> {
-        const entity = await em.getRepository(UserAddressEntity).findOneOrFail(id)
+        const entity = await em
+            .getRepository(UserAddressEntity)
+            .findOneOrFail(id)
 
         return em.assign(entity, {
-            userId: dto.userId,
+            user: dto.user,
             address: dto.address,
             city: dto.city,
             postalCode: dto.postalCode,

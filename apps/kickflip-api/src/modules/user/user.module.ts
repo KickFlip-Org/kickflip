@@ -8,10 +8,6 @@ import { UserService } from "./user.service"
     imports: [RoleModule],
     controllers: [UserController],
     providers: [UserService, UserMapper],
-<<<<<<< HEAD
-    exports: [UserService, UserMapper]
-=======
     exports: [UserService, UserMapper],
->>>>>>> 02c046b41f967c072e8cee849643963dab17eb88
 })
 export class UserModule {}
