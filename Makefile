@@ -20,7 +20,7 @@ init: node_modules docker/config/traefik/certs
 	@ cd docker/config/traefik/certs && mkcert kickflip-workspace.dev "*.kickflip-workspace.dev"
 
 	@ echo -e "${ARROW} Editing hosts file..."
-	@ sudo sed -i '$ a 127.0.0.1	kickflip-workspace.dev kickflip.kickflip-workspace.dev api-kickflip.kickflip-workspace.dev' /etc/hosts
+	sudo sed -i '$$ a 127.0.0.1	kickflip-workspace.dev kickflip.kickflip-workspace.dev api-kickflip.kickflip-workspace.dev' /etc/hosts
 
 	@ echo -e "${ARROW} Initialize database..."
 	@ docker compose up -d postgres
