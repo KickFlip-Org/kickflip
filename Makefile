@@ -4,6 +4,7 @@ GREEN := \033[32m
 RESET := \033[39m
 ARROW := \033[1m\033[31m>$(GREEN)>\033[33m>$(RESET)
 
+
 node_modules:
 	@ echo -e "${ARROW} Install node dependencies..."
 	@ pnpm install
@@ -20,7 +21,8 @@ init: node_modules docker/config/traefik/certs
 	@ cd docker/config/traefik/certs && mkcert kickflip-workspace.dev "*.kickflip-workspace.dev"
 
 	@ echo -e "${ARROW} Editing hosts file..."
-	sudo sed -i '$$ a 127.0.0.1	kickflip-workspace.dev kickflip.kickflip-workspace.dev api-kickflip.kickflip-workspace.dev' /etc/hosts
+	@ sudo sed -i '/kickflip/d' /etc/hosts
+	@ sudo sed -i '$$ a 127.0.0.1	kickflip-workspace.dev kickflip.kickflip-workspace.dev api-kickflip.kickflip-workspace.dev' /etc/hosts
 
 	@ echo -e "${ARROW} Initialize database..."
 	@ docker compose up -d postgres
