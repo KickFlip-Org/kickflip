@@ -97,3 +97,9 @@ docker compose run --rm kickflip-api pnpm exec nx run kickflip-api:migrate
 ```bash
 docker compose up -d
 ```
+
+### **Dans le navigateur**
+
+webui : kickflip.kickflip-workspace.dev
+
+api : api-kickflip.kickflip-workspace.dev
