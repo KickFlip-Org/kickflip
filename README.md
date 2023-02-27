@@ -1,12 +1,8 @@
-# api
-⚙️ API for KickFlip
+# KickFlip
 
-# KickflipApi - Espace de travail
+### Dependencies
 
-## Technologies utilisées
-
-### Global
-
+Global
 - [nx 15](https://nx.dev/)
 - [pnpm 7](https://pnpm.js.org/)
 - [Node 18](https://nodejs.org/)
@@ -15,76 +11,73 @@
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-### Back-end
-
+Back-end
 - [Nest 9](https://nestjs.com/)
 - [Mikro-ORM 5](https://mikro-orm.io/)
 
-### Certificats SSL
+## Linux & MacOS
 
-L'environnement de développement utilise des certificats SSL lors des échanges.  
-Pour en générer et que le système les reconnaisse, installer `mkcert` :
+### Dependencies *- ArchLinux / Manjaro*
 
-#### **Arch/Manjaro**
-
+The development environment uses SSL certificates during exchanges.  
+To generate them and have the system recognize them, install `mkcert` :
 ```bash
 sudo pacman -Sy nss mkcert
 ```
 
-#### **Génération du certificat racine**
+The development environment uses `NodeJS`. To install it, do the following commands :
+```bash
+sudo pacman -Sy nodejs
+```
+
+The package manager used in this project is `pnpm`. To install it, do the following commands :
+```bash
+sudo pacman -Sy pnpm
+```
+
+### Install environment
+#### Initialize environment
+```bash
+make init
+```
+
+#### Start services
+```bash
+make start
+```
+
+#### Stop services
+```bash
+make stop
+```
+
+## Windows
+
+### **Generate root certificate**
 
 ```bash
 mkcert -install
 ```
 
-#### **Génération des certificats**
-
+### **Generate certificates**
+Create folder `docker/config/traefik/certs`, access it and execute this command :
 ```bash
-(cd docker/config/traefik/certs && mkcert kickflip-workspace.dev "*.kickflip-workspace.dev")
+mkcert kickflip-workspace.dev "*.kickflip-workspace.dev"
 ```
 
-### Résolution DNS de l'environnement de développement
-
+### DNS resolution
+Add the following line in `/etc/hosts`
 ```bash
-sudo nano /etc/hosts
-
-# Ajouter la ligne suivante
 127.0.0.1	kickflip-workspace.dev kickflip.kickflip-workspace.dev api-kickflip.kickflip-workspace.dev
-
-# Sauvegarder et quitter
 ```
 
-
-## Installation des outils de l'environnement
-
-### Node
-
-#### **Arch/Manjaro**
-
-```bash
-sudo pacman -Sy nodejs
-```
-
-### PNPM
-
-Le gestionnaire de paquet utilisé dans ce projet est pnpm.  
-Pour l'installer, effectuer les commandes suivantes :
-
-#### **Arch/Manjaro**
-
-```bash
-sudo pacman -Sy pnpm
-```
-
-## Démarrage du développement
-
-### **Installer les dépendances**
+### **Install NodeJS dependencies**
 
 ```bash
 pnpm install
 ```
 
-### **Initialiser la base de données**
+### **Initialize the database**
 
 ```bash
 docker compose up -d postgres
@@ -92,14 +85,13 @@ docker compose exec postgres psql -U postgres -c "create database kickflip"
 docker compose run --rm kickflip-api pnpm exec nx run kickflip-api:migrate
 ```
 
-### **Démarrer les services**
+### **Initialize the database**
 
 ```bash
 docker compose up -d
 ```
 
-### **Dans le navigateur**
-
-webui : kickflip.kickflip-workspace.dev
-
-api : api-kickflip.kickflip-workspace.dev
+### **Browser**
+If the installation was successful, you can access to
+- [API](https://api-kickflip.kickflip-workspace.dev)
+- [WebUI](https://kickflip.kickflip-workspace.dev)
