@@ -28,8 +28,8 @@ export class UserEntity {
     @Property()
     public lastName!: string
 
-    @OneToMany(() => UserAddressEntity, (relation) => relation.address)
-    public address = new Collection<UserAddressEntity>(this);
+    @OneToMany(() => UserAddressEntity, (relation) => relation.user)
+    public address = new Collection<UserAddressEntity>(this)
 
     @Property()
     public phone!: string

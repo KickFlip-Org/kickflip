@@ -1,0 +1,70 @@
+{
+    "name": "kickflip-webui",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/kickflip-webui",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/next:build",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "root": "apps/kickflip-webui",
+                "outputPath": "dist/apps/kickflip-webui"
+            },
+            "configurations": {
+                "development": {
+                    "outputPath": "apps/kickflip-webui"
+                },
+                "production": {}
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/next:server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "kickflip-webui:build",
+                "dev": true,
+                "hostname": "0.0.0.0"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "kickflip-webui:build:development",
+                    "dev": true
+                },
+                "production": {
+                    "buildTarget": "kickflip-webui:build:production",
+                    "dev": false
+                }
+            }
+        },
+        "export": {
+            "executor": "@nrwl/next:export",
+            "options": {
+                "buildTarget": "kickflip-webui:build:production"
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "apps/kickflip-webui/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/kickflip-webui/**/*.{ts,tsx,js,jsx}"]
+            }
+        }
+    },
+    "tags": []
+}

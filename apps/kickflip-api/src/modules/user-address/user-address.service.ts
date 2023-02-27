@@ -1,8 +1,12 @@
 import { type FilterQuery, MikroORM } from "@mikro-orm/core"
 import { Injectable } from "@nestjs/common"
-import type { CreateUserAddressDto, UpdateUserAddressDto, UserAddressDto } from "../../dto/user-address.dto"
+import type {
+    CreateUserAddressDto,
+    UpdateUserAddressDto,
+    UserAddressDto,
+} from "../../dto/user-address.dto"
 import { UserAddressEntity } from "./user-address.entity"
-import type { UserAddressMapper } from "./user-address.mapper"
+import { UserAddressMapper } from "./user-address.mapper"
 
 @Injectable()
 export class UserAddressService {
@@ -15,14 +19,18 @@ export class UserAddressService {
         this.mapper = mapper
     }
 
-    public async get(filter: FilterQuery<UserAddressEntity>): Promise<UserAddressDto> {
+    public async get(
+        filter: FilterQuery<UserAddressEntity>
+    ): Promise<UserAddressDto> {
         const em = this.orm.em.fork()
         const repository = em.getRepository(UserAddressEntity)
         const item = await repository.findOneOrFail(filter)
         return await this.mapper.entityToDto(item, em)
     }
 
-    public async create(parameters: CreateUserAddressDto): Promise<UserAddressDto> {
+    public async create(
+        parameters: CreateUserAddressDto
+    ): Promise<UserAddressDto> {
         const em = this.orm.em.fork()
         const item = this.mapper.createDtoToEntity(parameters, em)
         await em.persistAndFlush(item)

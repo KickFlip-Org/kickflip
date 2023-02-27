@@ -16,7 +16,7 @@ export class UserAddressEntity {
     })
     public id = randomUUID()
 
-    @ManyToOne({ entity: () => UserEntity })
+    @ManyToOne(() => UserEntity)
     public user: UserEntity
 
     @Property()

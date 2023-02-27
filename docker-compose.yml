@@ -10,11 +10,12 @@ x-source-files: &source-files
   - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
   - ./tools/:/app/tools/
   - ./tsconfig.base.json:/app/tsconfig.base.json
+  - ./babel.config.json:/app/babel.config.json
 
 networks:
-  databases:
   front: 
     name: kickflip-front
+  databases:
 
 volumes:
   postgres-data:
@@ -31,7 +32,8 @@ services:
     networks:
       front:
         aliases:
-          - "api-kickflip.kickflip-workspace.dev"
+          - kickflip.kickflip-workspace.dev
+          - api-kickflip.kickflip-workspace.dev
 
     volumes:
       - ./docker/config/traefik:/etc/traefik:ro
@@ -65,6 +67,12 @@ services:
     working_dir: /app
     command: pnpm exec nx serve kickflip-api
     volumes: *source-files
+    # image: kickflip-api-prod
+    # build:
+    #   dockerfile: docker/node.dockerfile
+    #   context: .
+    #   args: 
+    #     PROJECT: kickflip-api
     networks:
       - databases
       - front
@@ -92,5 +100,40 @@ services:
       - traefik.http.routers.kickflip-api.rule=Host(`api-kickflip.kickflip-workspace.dev`)
       - traefik.http.routers.kickflip-api.tls=true
       - traefik.http.services.kickflip-api.loadbalancer.server.port=8080
+ 
+  kickflip-webui:
+    image: kickflip-workspace-dev
+    build:
+      dockerfile: Dockerfile
+      context: .
+    
+    working_dir: /app
+    command: pnpm exec nx serve kickflip-webui
+   
+    volumes: *source-files
+    expose:
+      - 4200
+    # image: kickflip-webui
+    # build:
+    #   dockerfile: docker/next.dockerfile
+    #   context: .
+    #   args:
+    #     PROJECT: kickflip-webui
+    #     NEXT_PUBLIC_API_URL: https://api-kickflip.kickflip-workspace.dev
+    # expose:
+    #   - 3000
+    restart: on-failure
+    networks:
+      - front
+    depends_on:
+      - kickflip-api
+      - traefik
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
 
-  
+      NEXT_PUBLIC_API_URL: https://api-kickflip.kickflip-workspace.dev
+      
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kickflip-webui.rule=Host(`kickflip.kickflip-workspace.dev`)
+      - traefik.http.routers.kickflip-webui.tls=true

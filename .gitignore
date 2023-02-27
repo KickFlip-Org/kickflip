@@ -4,6 +4,7 @@
 dist
 tmp
 /out-tsc
+*.tar
 
 # dependencies
 node_modules
@@ -38,3 +39,6 @@ docker/config/traefik/certs
 # System Files
 .DS_Store
 Thumbs.db
+
+# Next.js
+.next
