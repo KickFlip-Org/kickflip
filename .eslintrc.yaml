@@ -67,3 +67,5 @@ rules:
     - error
     - properties: "above"
       methods: "above"
+
+  unicorn/no-null: off
