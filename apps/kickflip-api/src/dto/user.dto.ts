@@ -3,6 +3,7 @@ import {
     IsArray,
     IsEmail,
     IsISO8601,
+    IsOptional,
     IsString,
     IsUUID,
     MinLength,
@@ -40,6 +41,12 @@ export class UserDto {
     public passwordConfirm: string
 
     public role: RoleDto
+
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => UserAddressDto)
+    @IsOptional()
+    public address?: UserAddressDto[]
 }
 
 export class CreateUserDto {
@@ -62,7 +69,8 @@ export class CreateUserDto {
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => UserAddressDto)
-    public address: UserAddressDto[]
+    @IsOptional()
+    public address?: UserAddressDto[]
 
     public phone!: string
 
