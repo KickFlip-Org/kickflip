@@ -2,6 +2,7 @@ import type { AppProps } from "next/app"
 import Head from "next/head"
 import "./styles.css"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { AuthProvider } from "../context/AuthProvider"
 
 export const queryClient = new QueryClient({
     defaultOptions: {
@@ -18,12 +19,14 @@ export const queryClient = new QueryClient({
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <QueryClientProvider client={queryClient}>
-            <Head>
-                <title>KickFlip</title>
-            </Head>
-            <main className="app">
-                <Component {...pageProps} />
-            </main>
+            <AuthProvider>
+                <Head>
+                    <title>KickFlip</title>
+                </Head>
+                <main className="app">
+                    <Component {...pageProps} />
+                </main>
+            </AuthProvider>
         </QueryClientProvider>
     )
 }

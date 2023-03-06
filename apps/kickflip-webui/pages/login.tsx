@@ -1,14 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { UserLogin } from "../queries/auth-queries"
 import { LoginForm } from "../components/LoginForm"
+import { authContext } from "../context/AuthProvider"
+import router from "next/router"
 
-export function Login() {
-    const queryClient = useQueryClient()
+// eslint-disable-next-line import/no-default-export
+export default function Login() {
+    const { setToken } = useContext(authContext)
     const [errorMessage, setErrorMessage] = useState("")
+    const queryClient = useQueryClient()
     const loginMutation = useMutation(UserLogin, {
-        onSuccess: () => {
+        onSuccess: async (data) => {
             void queryClient.invalidateQueries(["login"])
+            setToken(data.accessToken)
+            await router.push("/")
         },
 
         onError: (error: Error) => {
