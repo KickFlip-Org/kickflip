@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <QueryClientProvider client={queryClient}>
             <Head>
-                <title>Welcome to kickflip-webui!</title>
+                <title>KickFlip</title>
             </Head>
             <main className="app">
                 <Component {...pageProps} />
