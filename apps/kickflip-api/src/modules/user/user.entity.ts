@@ -48,7 +48,7 @@ export class UserEntity {
     @OneToOne({ entity: () => RoleEntity })
     public role!: RoleEntity
 
-    @Property()
+    @Property({ default: 0 })
     public credits!: number
 
     public constructor(parameters: {
@@ -60,7 +60,6 @@ export class UserEntity {
         hashedPassword: string
         role: RoleEntity
         phone: string
-        credits: number
     }) {
         this.userName = parameters.userName
         this.firstName = parameters.firstName
@@ -71,6 +70,5 @@ export class UserEntity {
         this.hashedPassword = parameters.hashedPassword
         this.role = parameters.role
         this.phone = parameters.phone
-        this.credits = parameters.credits
     }
 }

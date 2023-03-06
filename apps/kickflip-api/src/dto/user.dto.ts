@@ -74,8 +74,6 @@ export class CreateUserDto {
 
     public phone!: string
 
-    public credits: number
-
     @IsEmail()
     public email!: string
 
@@ -108,6 +106,7 @@ export class UpdateUserDto {
     @IsISO8601({ strict: true })
     public createdAt: string
 
+    @IsOptional()
     public credits: number
 
     @IsEmail()

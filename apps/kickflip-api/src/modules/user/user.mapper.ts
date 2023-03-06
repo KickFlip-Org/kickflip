@@ -31,7 +31,6 @@ export class UserMapper {
             hashedPassword,
             role,
             phone: dto.phone,
-            credits: dto.credits,
         })
     }
 
