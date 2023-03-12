@@ -62,4 +62,4 @@ stop:
 	@ echo -e "[${GREEN}OK${RESET}] Stopped"
 
 
-.PHONY: init, start, stop
+.PHONY: init, start, db, stop
