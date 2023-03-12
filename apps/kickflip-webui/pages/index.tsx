@@ -13,7 +13,9 @@ export default function Index() {
             <p>
                 Hello {user.firstName} {user.lastName}
             </p>
-            <button onClick={disconnect}>Logout</button>
+            <button className="button" onClick={disconnect}>
+                Logout
+            </button>
         </>
     )
 }

@@ -59,6 +59,7 @@ input:focus {
 
 .button {
     max-width: 150px;
+    max-height: 50px;
     border: solid 2px var(--orange);
     padding: 5px 40px;
     font-size: 20px;
