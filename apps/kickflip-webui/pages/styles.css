@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
 
 /*****************   ROOT   *****************/
 :root {
@@ -22,14 +22,13 @@ body {
     font-family: "Inter", sans-serif;
     background-color: var(--white);
     color: var(--black);
-    font-weight: 500;
+    font-weight: 400;
     margin: 0;
     width: var(--total-width);
 }
 
 /*****************   LAYOUTS   *****************/
 .navbar {
-    /*background-color: var(--orange);*/
     height: var(--navbar-height);
 }
 
@@ -40,28 +39,36 @@ body {
 }
 
 .footer {
-    /*background-color: var(--orange);*/
     height: var(--footer-height);
 }
 
 /*****************   TAG   *****************/
+label {
+    user-select: none;
+}
 input {
     background-color: transparent;
     border: none;
     border-bottom: solid 1px var(--black);
     text-underline: var(--black);
-    padding: 5px;
+    padding: 5px 0;
     font-size: 15px;
 }
 input:focus {
     outline: none;
+    border-color: var(--orange);
+}
+
+.link {
+    color: var(--blue);
+    text-decoration: none;
 }
 
 .button {
     max-width: 150px;
     max-height: 50px;
     border: solid 2px var(--orange);
-    padding: 5px 40px;
+    padding: 5px 10%;
     font-size: 20px;
     border-radius: 30px;
     background-color: transparent;
@@ -72,6 +79,9 @@ input:focus {
 }
 
 /*****************   COMPONENTS   *****************/
+.error {
+    color: red;
+}
 .title {
     font-weight: 600;
     font-size: 40px;
@@ -79,12 +89,17 @@ input:focus {
     user-select: none;
 }
 
-.sign {
+.fields-form {
+    background-color: var(--light-grey);
+    padding: 50px;
+    border-radius: 30px;
+}
+.simple-form {
     height: 350px;
     width: 350px;
     background-color: var(--light-grey);
     padding: 50px;
-    border-radius: 10%;
+    border-radius: 30px;
 }
 
 .form {
@@ -93,14 +108,18 @@ input:focus {
     flex-direction: column;
     justify-content: space-evenly;
 }
-.form-fields {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 30px;
-}
 .form-validate {
     width: inherit;
     display: grid;
     place-items: center;
+}
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.field {
+    display: flex;
+    flex-direction: column;
 }

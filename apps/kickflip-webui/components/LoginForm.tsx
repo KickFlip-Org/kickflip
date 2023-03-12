@@ -16,18 +16,25 @@ export function LoginForm({ onSubmit, errorMessage }: LoginFormProperties) {
             <div className="form-fields">
                 <input
                     {...register("userName", { required: true })}
-                    placeholder="Login"
+                    placeholder="Login*"
+                    required
                 />
-
                 <input
                     {...register("passwordConfirm", { required: true })}
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password*"
+                    required
                 />
             </div>
-            {errors.userName && <span>Username is required</span>}
-            {errors.passwordConfirm && <span>Username is required</span>}
-            {errorMessage && <span>{errorMessage}</span>}
+            <div className="errors">
+                {errors.userName && (
+                    <p className="error">Username is required</p>
+                )}
+                {errors.passwordConfirm && (
+                    <p className="error">Password is required</p>
+                )}
+                {errorMessage && <p className="error">{errorMessage}</p>}
+            </div>
             <div className="form-validate">
                 <input
                     className="button"
@@ -35,6 +42,12 @@ export function LoginForm({ onSubmit, errorMessage }: LoginFormProperties) {
                     id="submit"
                     value="Login"
                 />
+            </div>
+            <div className="links">
+                <a className="link" href="/register">
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
+                    <span>I don't have an account</span>
+                </a>
             </div>
         </form>
     )

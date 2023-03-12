@@ -24,7 +24,7 @@ export default function Login() {
     })
     const handleLogin = loginMutation.mutate
     return (
-        <div className="sign">
+        <div className="simple-form">
             <Title content="Login" />
             <LoginForm onSubmit={handleLogin} errorMessage={errorMessage} />
         </div>

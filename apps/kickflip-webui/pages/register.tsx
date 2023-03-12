@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { UserSignup } from "../queries/auth-queries"
 import { useRouter } from "next/router"
 import { RegisterForm } from "../components/RegisterForm"
+import { Title } from "../components/Title"
 
 // eslint-disable-next-line import/no-default-export
 export default function SignUp() {
@@ -20,5 +21,10 @@ export default function SignUp() {
         },
     })
     const handleSignup = signupMutation.mutate
-    return <RegisterForm onSubmit={handleSignup} errorMessage={errorMessage} />
+    return (
+        <div className="fields-form">
+            <Title content="Register" />
+            <RegisterForm onSubmit={handleSignup} errorMessage={errorMessage} />
+        </div>
+    )
 }
