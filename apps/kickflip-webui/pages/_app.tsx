@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app"
 import Head from "next/head"
-import "./styles.css"
+import "../public/css/main.css"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { AuthProvider } from "../context/AuthProvider"
 
