@@ -4,6 +4,7 @@ import { UserSignup } from "../queries/auth-queries"
 import { useRouter } from "next/router"
 import { RegisterForm } from "../components/RegisterForm"
 import { Title } from "../components/Title"
+import { Link } from "../components/Link"
 
 // eslint-disable-next-line import/no-default-export
 export default function SignUp() {
@@ -22,9 +23,12 @@ export default function SignUp() {
     })
     const handleSignup = signupMutation.mutate
     return (
-        <div className="fields-form">
+        <div className="card">
             <Title content="Register" />
             <RegisterForm onSubmit={handleSignup} errorMessage={errorMessage} />
+            <div className="links">
+                <Link to="/login" text="I already have an account" />
+            </div>
         </div>
     )
 }

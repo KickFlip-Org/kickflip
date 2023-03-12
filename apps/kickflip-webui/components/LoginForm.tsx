@@ -43,12 +43,6 @@ export function LoginForm({ onSubmit, errorMessage }: LoginFormProperties) {
                     value="Login"
                 />
             </div>
-            <div className="links">
-                <a className="link" href="/register">
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <span>I don't have an account</span>
-                </a>
-            </div>
         </form>
     )
 }
