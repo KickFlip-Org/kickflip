@@ -7,7 +7,7 @@ export default function Index() {
     const { user } = useContext(userContext)
     const { disconnect } = useContext(authContext)
     return (
-        <div className="simple-form">
+        <div className="card">
             <p>
                 <b>Username</b>: {user.userName}
             </p>

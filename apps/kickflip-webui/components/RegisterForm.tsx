@@ -18,34 +18,33 @@ export function RegisterForm({
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-fields">
                 <div className="field">
-                    <label htmlFor="username">Username*</label>
+                    <label htmlFor="userName">Username*</label>
                     <input
                         {...register("userName", { required: true })}
                         type="text"
-                        id="username"
-                        name="username"
+                        id="userName"
+                        name="userName"
                         placeholder="GOSSETJohn"
-                        required
                     />
                 </div>
                 <div className="field">
-                    <label htmlFor="firstname">Firstname*</label>
+                    <label htmlFor="firstName">Firstname*</label>
                     <input
                         {...register("firstName", { required: true })}
                         type="text"
-                        id="firstname"
-                        name="firstname"
+                        id="firstName"
+                        name="firstName"
                         placeholder="John"
                         required
                     />
                 </div>
                 <div className="field">
-                    <label htmlFor="lastname">Lastname*</label>
+                    <label htmlFor="lastName">Lastname*</label>
                     <input
                         {...register("lastName", { required: true })}
                         type="text"
-                        id="lastname"
-                        name="lastname"
+                        id="lastName"
+                        name="lastName"
                         placeholder="GOSSET"
                         required
                     />
@@ -77,19 +76,18 @@ export function RegisterForm({
                         type="text"
                         id="role"
                         name="role"
-                        placeholder="g65serdg51vsed651vgds651vds6"
+                        placeholder="d2c80fb1-a687-4db6-93e4-d048d4ee8a6b"
                         required
                     />
                 </div>
                 <div className="field">
-                    <label htmlFor="password">Password*</label>
+                    <label htmlFor="passwordConfirm">Password*</label>
                     <input
                         {...register("passwordConfirm", { required: true })}
                         type="password"
-                        id="password"
-                        name="password"
+                        id="passwordConfirm"
+                        name="passwordConfirm"
                         placeholder="*******************"
-                        required
                     />
                 </div>
             </div>
@@ -106,7 +104,7 @@ export function RegisterForm({
                 <input
                     className="button"
                     type="submit"
-                    id="submit"
+                    id="register"
                     value="Register"
                 />
             </div>

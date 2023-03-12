@@ -39,7 +39,7 @@ export function LoginForm({ onSubmit, errorMessage }: LoginFormProperties) {
                 <input
                     className="button"
                     type="submit"
-                    id="submit"
+                    id="login"
                     value="Login"
                 />
             </div>

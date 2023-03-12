@@ -18,8 +18,10 @@ export interface AuthProviderProperties {
     children: ReactNode
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export function AuthProvider({ children }: AuthProviderProperties) {
     const router = useRouter()
+    const loginRoutes = ["/login", "/register"]
     const [token, setToken] = useLocalStorage<string | undefined>(
         "token",
         undefined
@@ -36,17 +38,15 @@ export function AuthProvider({ children }: AuthProviderProperties) {
         [setToken]
     )
 
-    // TODO: Rewrite router
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (!token) {
-        if (typeof window !== "undefined" && router.pathname !== "/login") {
+    if (typeof window !== "undefined") {
+        if (!(token ?? "") && !loginRoutes.includes(router.pathname)) {
             void router.push("/login")
             return null
         }
-        // eslint-disable-next-line sonarjs/elseif-without-else
-    } else if (typeof window !== "undefined" && router.pathname === "/login") {
-        void router.push("/")
-        return null
+        if ((token ?? "") && router.pathname === "/login") {
+            void router.push("/profile")
+            return null
+        }
     }
     return (
         <authContext.Provider value={value}>
