@@ -19,8 +19,11 @@ You can now test the application from the following links
 - [API](https://api-kickflip.kickflip-workspace.dev)
 - [WebUI](https://kickflip.kickflip-workspace.dev)
 
-## Test
-You can also test the API from the following file [api.http](api.http)
+## API
+### Documentation
+You can test the API from [api.http](api.http)
+### Test
+You have also the documentation of the routes on [/docs](https://api-kickflip.kickflip-workspace.dev/docs)
 
 ## Stop services
 ```bash
@@ -45,8 +48,11 @@ You can now test the application from the following links
 - [API](https://api-kickflip.kickflip-workspace.dev)
 - [WebUI](https://kickflip.kickflip-workspace.dev)
 
-## Test
-You can also test the API from the following file [api.http](api.http)
+## API
+### Documentation
+You can test the API from [api.http](api.http)
+### Test
+You have also the documentation of the routes on [/docs](https://api-kickflip.kickflip-workspace.dev/docs)
 
 ## Stop services
 ```bash
