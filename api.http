@@ -42,9 +42,10 @@ Content-Type: application/json
 
 
 ### Get profile
+# Replace token
 GET https://api-kickflip.kickflip-workspace.dev/auth/me
 Content-Type: application/json
-Authorization: token  # Replace token
+Authorization: token
 
 
 ### Get all users
