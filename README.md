@@ -35,18 +35,22 @@ The package manager used in this project is `pnpm`. To install it, do the follow
 sudo pacman -Sy pnpm
 ```
 
-### Install environment
-#### Initialize environment
+### Initialize environment
 ```bash
 make init
 ```
 
-#### Start services
+### Start services
 ```bash
 make start
 ```
 
-#### Stop services
+### Open database
+```bash
+make db
+```
+
+### Stop services
 ```bash
 make stop
 ```
@@ -54,7 +58,6 @@ make stop
 ## Windows
 
 ### **Generate root certificate**
-
 ```bash
 mkcert -install
 ```
@@ -72,21 +75,18 @@ Add the following line in `/etc/hosts`
 ```
 
 ### **Install NodeJS dependencies**
-
 ```bash
 pnpm install
 ```
 
 ### **Initialize the database**
-
 ```bash
 docker compose up -d postgres
 docker compose exec postgres psql -U postgres -c "create database kickflip"
 docker compose run --rm kickflip-api pnpm exec nx run kickflip-api:migrate
 ```
 
-### **Initialize the database**
-
+### **Start services**
 ```bash
 docker compose up -d
 ```
@@ -95,3 +95,13 @@ docker compose up -d
 If the installation was successful, you can access to
 - [API](https://api-kickflip.kickflip-workspace.dev)
 - [WebUI](https://kickflip.kickflip-workspace.dev)
+
+### **Open database**
+```bash
+docker exec -it kickflip-postgres-1 psql -U postgres -d kickflip
+```
+
+### **Stop services**
+```bash
+docker compose down
+```
