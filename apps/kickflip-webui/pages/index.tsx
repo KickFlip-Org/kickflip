@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { userContext } from "../context/UserProvider"
 import { authContext } from "../context/AuthProvider"
+import { Title } from "../components/Title"
 
 // eslint-disable-next-line import/no-default-export
 export default function Index() {
@@ -8,7 +9,7 @@ export default function Index() {
     const { disconnect } = useContext(authContext)
     return (
         <>
-            <p>Kickflip</p>
+            <Title content="KickFlip" />
             <p>
                 Hello {user.firstName} {user.lastName}
             </p>
