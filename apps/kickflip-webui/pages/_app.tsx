@@ -23,9 +23,11 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Head>
                     <title>KickFlip</title>
                 </Head>
+                <header className="navbar"></header>
                 <main className="app">
                     <Component {...pageProps} />
                 </main>
+                <footer className="footer"></footer>
             </AuthProvider>
         </QueryClientProvider>
     )

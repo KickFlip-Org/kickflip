@@ -12,17 +12,30 @@ export function LoginForm({ onSubmit, errorMessage }: LoginFormProperties) {
 
     return (
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("userName", { required: true })} />
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-fields">
+                <input
+                    {...register("userName", { required: true })}
+                    placeholder="Login"
+                />
 
-            <input
-                {...register("passwordConfirm", { required: true })}
-                type="password"
-            />
+                <input
+                    {...register("passwordConfirm", { required: true })}
+                    type="password"
+                    placeholder="Password"
+                />
+            </div>
             {errors.userName && <span>Username is required</span>}
             {errors.passwordConfirm && <span>Username is required</span>}
             {errorMessage && <span>{errorMessage}</span>}
-            <input type="submit" id="submit" />
+            <div className="form-validate">
+                <input
+                    className="button"
+                    type="submit"
+                    id="submit"
+                    value="Login"
+                />
+            </div>
         </form>
     )
 }
