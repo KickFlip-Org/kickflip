@@ -1,0 +1,52 @@
+### Create a role
+POST https://api-kickflip.kickflip-workspace.dev/role
+Content-Type: application/json
+
+{
+  "name": "Utilisateur",
+  "permission": ["première-permission"]
+}
+
+
+### Get role
+# Replace user_id
+GET https://api-kickflip.kickflip-workspace.dev/user/user_id
+Content-Type: application/json
+
+
+### Register
+POST https://api-kickflip.kickflip-workspace.dev/auth/register
+Content-Type: application/json
+
+# Replace role_id
+{
+  "userName": "GOSSETJohn",
+  "firstName": "John",
+  "lastName": "GOSSET",
+  "passwordConfirm": "12345678",
+  "phone": "0644668877",
+  "credits": 0,
+  "email": "gossetJohn@gmail.com",
+  "role": "role_id"
+}
+
+
+### Login
+POST https://api-kickflip.kickflip-workspace.dev/auth/login
+Content-Type: application/json
+
+{
+  "userName": "GOSSETJohn",
+  "passwordConfirm": "12345678"
+}
+
+
+### Get profile
+GET https://api-kickflip.kickflip-workspace.dev/auth/me
+Content-Type: application/json
+Authorization: token  # Replace token
+
+
+### Get all users
+GET https://api-kickflip.kickflip-workspace.dev/user
+Content-Type: application/json
