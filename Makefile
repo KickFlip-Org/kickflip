@@ -51,6 +51,7 @@ db:
 	@ echo -e "${ARROW} Open database..."
 	@ echo -e "Show tables: ${YELLOW}\dt${RESET}"
 	@ echo -e 'Show table Users: ${YELLOW}TABLE "Users";${RESET}'
+	@ echo -e 'Clear table Users: ${YELLOW}TRUNCATE "Users" CASCADE;${RESET}'
 	@ echo -e "Exit: ${YELLOW}\q${RESET}"
 	@ docker exec -it kickflip-postgres-1 psql -U postgres -d kickflip
 	@ echo -e "${RED}Cancel${RESET}"
