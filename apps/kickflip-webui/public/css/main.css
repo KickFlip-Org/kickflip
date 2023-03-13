@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
+
+/*****************   ROOT   *****************/
+:root {
+    /* Colors */
+    --white: #ffffff;
+    --black: #000000;
+    --dark-grey: #757474;
+    --light-grey: #eeeeee;
+    --orange: #f08931;
+    --blue: #076aa1;
+
+    /* Sizes */
+    --total-width: 100%;
+    --navbar-height: 50px;
+    --footer-height: 100px;
+    --app-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+}
+
+/*****************   BODY   *****************/
+body {
+    font-family: "Inter", sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+    font-weight: 400;
+    margin: 0;
+    width: var(--total-width);
+}
+
+/*****************   LAYOUTS   *****************/
+.navbar {
+    height: var(--navbar-height);
+}
+
+.app {
+    display: grid;
+    justify-content: center;
+    height: var(--app-height);
+}
+
+.footer {
+    height: var(--footer-height);
+}
+
+.card {
+    width: 60vw;
+    height: fit-content;
+    max-width: 350px;
+    background-color: var(--light-grey);
+    padding: 50px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.main {
+    width: 60vw;
+    height: 500px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/*****************   TAG   *****************/
+p {
+    margin: 0;
+}
+
+label {
+    user-select: none;
+}
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px var(--black);
+    text-underline: var(--black);
+    padding: 5px 0;
+    font-size: 15px;
+}
+input:focus {
+    outline: none;
+    border-color: var(--orange);
+}
+
+.link {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.button {
+    max-width: 150px;
+    max-height: 50px;
+    border: solid 2px var(--orange);
+    padding: 5px 10%;
+    font-size: 20px;
+    border-radius: 30px;
+    background-color: transparent;
+}
+.button:hover {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+/*****************   COMPONENTS   *****************/
+.error {
+    color: red;
+}
+.title {
+    font-weight: 600;
+    font-size: 40px;
+    margin: 0;
+    user-select: none;
+}
+
+.form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-validate {
+    width: inherit;
+    display: grid;
+    place-items: center;
+}
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+}

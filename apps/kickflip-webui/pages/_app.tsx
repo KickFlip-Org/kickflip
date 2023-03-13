@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app"
 import Head from "next/head"
-import "./styles.css"
+import "../public/css/main.css"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { AuthProvider } from "../context/AuthProvider"
 
@@ -22,10 +22,17 @@ export default function App({ Component, pageProps }: AppProps) {
             <AuthProvider>
                 <Head>
                     <title>KickFlip</title>
+                    <meta property="og:title" content="KickFlip" key="title" />
+                    <link
+                        rel="shortcut icon"
+                        href="/img/logo_round_white.png"
+                    />
                 </Head>
+                <header className="navbar"></header>
                 <main className="app">
                     <Component {...pageProps} />
                 </main>
+                <footer className="footer"></footer>
             </AuthProvider>
         </QueryClientProvider>
     )

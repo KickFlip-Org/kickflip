@@ -4,6 +4,8 @@ import { UserLogin } from "../queries/auth-queries"
 import { LoginForm } from "../components/LoginForm"
 import { authContext } from "../context/AuthProvider"
 import router from "next/router"
+import { Title } from "../components/Title"
+import { Link } from "../components/Link"
 
 // eslint-disable-next-line import/no-default-export
 export default function Login() {
@@ -22,5 +24,13 @@ export default function Login() {
         },
     })
     const handleLogin = loginMutation.mutate
-    return <LoginForm onSubmit={handleLogin} errorMessage={errorMessage} />
+    return (
+        <div className="card">
+            <Title content="Login" />
+            <LoginForm onSubmit={handleLogin} errorMessage={errorMessage} />
+            <div className="links">
+                <Link to="/register" text="I don't have an account" />
+            </div>
+        </div>
+    )
 }

@@ -1,18 +1,27 @@
 import { useContext } from "react"
 import { userContext } from "../context/UserProvider"
-import { authContext } from "../context/AuthProvider"
+import { Link } from "../components/Link"
+// eslint-disable-next-line @typescript-eslint/no-shadow
+import Image from "next/image"
 
 // eslint-disable-next-line import/no-default-export
 export default function Index() {
     const { user } = useContext(userContext)
-    const { disconnect } = useContext(authContext)
     return (
-        <>
-            <p>Kickflip</p>
+        <div className="main">
+            <Image
+                src="/svg/logo_long_black.svg"
+                alt="Logo KickFlip"
+                width={200}
+                height={200}
+            />
             <p>
-                Hello {user.firstName} {user.lastName}
+                Hello{" "}
+                <b>
+                    {user.firstName} {user.lastName}
+                </b>
             </p>
-            <button onClick={disconnect}>Logout</button>
-        </>
+            <Link to="/profile" text="Profile" />
+        </div>
     )
 }
