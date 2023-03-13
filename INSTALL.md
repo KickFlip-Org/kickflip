@@ -57,11 +57,15 @@ Create folder `docker/config/traefik/certs`, access it and execute this command 
 mkcert kickflip-workspace.dev "*.kickflip-workspace.dev"
 ```
 
+If mkcert commands don't work, please follow the instructions [here](https://technixleo.com/create-locally-trusted-ssl-certificates-with-mkcert-on-windows/)
+
 ## DNS resolution
-Add the following line in `/etc/hosts`
+- Copy and paste the `C:\Windows\System32\drivers\etc\hosts` file into a different directory to which you have full access
+- Add the following line in this copy
 ```bash
 127.0.0.1	kickflip-workspace.dev kickflip.kickflip-workspace.dev api-kickflip.kickflip-workspace.dev
 ```
+- Replace the original file by the copy with a cut and paste
 
 ## Install NodeJS dependencies
 ```bash
