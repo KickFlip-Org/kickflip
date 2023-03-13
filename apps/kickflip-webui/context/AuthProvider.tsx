@@ -18,10 +18,9 @@ export interface AuthProviderProperties {
     children: ReactNode
 }
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 export function AuthProvider({ children }: AuthProviderProperties) {
     const router = useRouter()
-    const loginRoutes = ["/login", "/register"]
+    const unAuthenticatedRoutes = ["/", "/login", "/register"]
     const [token, setToken] = useLocalStorage<string | undefined>(
         "token",
         undefined
@@ -39,7 +38,10 @@ export function AuthProvider({ children }: AuthProviderProperties) {
     )
 
     if (typeof window !== "undefined") {
-        if (!(token ?? "") && !loginRoutes.includes(router.pathname)) {
+        if (
+            !(token ?? "") &&
+            !unAuthenticatedRoutes.includes(router.pathname)
+        ) {
             void router.push("/login")
             return null
         }
@@ -50,7 +52,7 @@ export function AuthProvider({ children }: AuthProviderProperties) {
     }
     return (
         <authContext.Provider value={value}>
-            {router.pathname === "/login" || router.pathname === "/register" ? (
+            {unAuthenticatedRoutes.includes(router.pathname) ? (
                 children
             ) : (
                 <UserProvider>{children}</UserProvider>
