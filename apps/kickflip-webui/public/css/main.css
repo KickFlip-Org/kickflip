@@ -43,6 +43,10 @@ body {
 }
 
 /*****************   TAG   *****************/
+p {
+    margin: 0;
+}
+
 label {
     user-select: none;
 }
