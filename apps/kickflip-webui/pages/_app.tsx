@@ -22,6 +22,11 @@ export default function App({ Component, pageProps }: AppProps) {
             <AuthProvider>
                 <Head>
                     <title>KickFlip</title>
+                    <meta property="og:title" content="KickFlip" key="title" />
+                    <link
+                        rel="shortcut icon"
+                        href="/img/logo_round_white.png"
+                    />
                 </Head>
                 <header className="navbar"></header>
                 <main className="app">
