@@ -1,60 +1,62 @@
-# KickFLip
 
-[Installation Guide](INSTALL.md)
+# 🛹 KickFlip
 
-# Linux & MacOS
+### Dependencies
 
-## Start services
+#### Global
+- [nx 15](https://nx.dev/)
+- [pnpm 7](https://pnpm.js.org/)
+- [Node 18](https://nodejs.org/)
+- [TypeScript 4](https://www.typescriptlang.org/)
+- [Postgres 15](https://www.postgresql.org/)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+#### Back-end
+- [Nest 9](https://nestjs.com/)
+- [Mikro-ORM 5](https://mikro-orm.io/)
+
+
+### Links
+- You must follow the [Installation Guide](INSTALL.md)
+- You must have the [API](https://api-kickflip.kickflip-workspace.dev) and the [WebUI](https://kickflip.kickflip-workspace.dev)
+- You can test the API from [api.http](api.http)
+- You have documentation of API routes on [/docs](https://api-kickflip.kickflip-workspace.dev/docs)
+
+
+
+## Linux & MacOS
+
+Start services
 ```bash
 make start
 ```
 
-## Open database
+Open database
 ```bash
 make db
 ```
 
-## Browser
-You can now test the application from the following links
-- [API](https://api-kickflip.kickflip-workspace.dev)
-- [WebUI](https://kickflip.kickflip-workspace.dev)
-
-## API
-### Documentation
-You can test the API from [api.http](api.http)
-### Test
-You have also the documentation of the routes on [/docs](https://api-kickflip.kickflip-workspace.dev/docs)
-
-## Stop services
+Stop services
 ```bash
 make stop
 ```
 
 
-# Windows
 
-## Start services
+## Windows
+
+Start services
 ```bash
 docker compose up -d
 ```
 
-## Open database
+Open database
 ```bash
 docker exec -it kickflip-postgres-1 psql -U postgres -d kickflip
 ```
 
-## Browser
-You can now test the application from the following links
-- [API](https://api-kickflip.kickflip-workspace.dev)
-- [WebUI](https://kickflip.kickflip-workspace.dev)
-
-## API
-### Documentation
-You can test the API from [api.http](api.http)
-### Test
-You have also the documentation of the routes on [/docs](https://api-kickflip.kickflip-workspace.dev/docs)
-
-## Stop services
+Stop services
 ```bash
 docker compose down
 ```
