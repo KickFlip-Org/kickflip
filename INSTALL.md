@@ -25,7 +25,7 @@
     make init
     ```
 
-> To launch the application you must follow the instructions [here](README.md)
+    > To launch the application you must follow the instructions [here](README.md)
 
 
 ## Windows
@@ -61,5 +61,5 @@
     docker compose run --rm kickflip-api pnpm exec nx run kickflip-api:migrate
     ```
 
-> To launch the application you must follow the instructions [here](README.md)
+    > To launch the application you must follow the instructions [here](README.md)
  
